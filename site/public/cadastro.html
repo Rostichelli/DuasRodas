@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Duas rodas</title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+</head>
+
+<body>
+    <!-- nav-bar -->
+    <div class="navbar-container">
+        <nav>
+            <a href="#"><img class="logo" src="./img/logo_riders-removebg-preview.png" alt=""></a>
+            <ul class="navbar-items">
+                <li><a href="./index.html">Home</a></li>
+                <!-- <li><a href="#">Simulação</a></li> -->
+                <li><a href="./cadastro.html">Cadastro</a></li>
+                <li><a href="./login.html" class="btn-login">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- conteudo pricipal -->
+    <main>
+        <div class="container">
+            <div class="formulario">
+                <h2>
+                    Duas rodas
+                </h2>
+                <p>
+                    Cadastre-se para ter acesso a conteudos exclusivos!!!
+                </p>
+
+                <form class="form" name="form">
+
+                    <input class="input" id="ipt_nome" placeholder="Nome">
+
+                    <span id="span_nome"></span>
+
+                    <input class="input" id="ipt_email" placeholder="seuemail@gmail.com">
+
+                    <span id="span_email"></span>
+
+                    <input type="password" class="input" id="ipt_senha" placeholder="Senha">
+
+                    <span id="span_senha"></span>
+
+                    <input type="password" class="input" id="ipt_conf_senha" placeholder="Confirme sua senha">
+
+                    <span id="span_conf_senha"></span>
+
+                </form>
+
+                <button onclick="cadastrar()" class="btn_cadastrar">
+                    CADASTRAR
+                </button>
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <h4>
+                Douglas Rostichelli Alves © 2022
+            </h4>
+        </div>
+    </footer>
+
+</html>
+
+<script>
+
+    function cadastrar() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = ipt_nome.value;
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+        var confirmacaoSenhaVar = ipt_conf_senha.value;
+
+        // Validações do nome 
+        var nome_valido = true;
+        if (nomeVar.length < 1) {
+            nome_valido = false;
+            span_nome.innerHTML = `Nome invalido`;
+
+        } else if (nomeVar.indexOf("1") > -1 ||
+            nomeVar.indexOf("2") > -1 ||
+            nomeVar.indexOf("3") > -1 ||
+            nomeVar.indexOf("4") > -1 ||
+            nomeVar.indexOf("5") > -1 ||
+            nomeVar.indexOf("6") > -1 ||
+            nomeVar.indexOf("7") > -1 ||
+            nomeVar.indexOf("8") > -1 ||
+            nomeVar.indexOf("9") > -1 ||
+            nomeVar.indexOf("0") > -1
+        ) {
+            span_nome.innerHTML = `Nome invalido`;
+            nome_valido = false;
+        }
+
+        else if (nomeVar.length < 3 ||
+            nomeVar.length > 60) {
+            nome_valido = false;
+            span_nome.innerHTML = `max 60 caracteres min 2`;
+        } else {
+            span_nome.innerHTML = ``;
+        }
+
+        // Validações de email
+        var email_valido = true;
+
+        if (emailVar.length < 1) {
+            email_valido = false;
+            span_email.innerHTML = `Email invalido`;
+
+        } else if (emailVar.indexOf("@") < -1) {
+            email_valido = false;
+            span_email.innerHTML = `Email invalido`;
+
+        } else if (emailVar.indexOf("@") < 5) {
+            email_valido = false;
+            span_email.innerHTML = `Email invalido`;
+
+        // } else if (emailVar.indexOf(".com") 
+        //     emailVar.indexOf(".com.br") == false) {
+
+        } else if (emailVar.endsWith(".com") == false &&
+            emailVar.endsWith(".com.br") == false) {
+            email_valido = false;
+            span_email.innerHTML = `Email invalido`;
+
+        } else {
+            span_email.innerHTML = ``;
+        }
+
+        // VALIDANDO SENHA
+        var senha_valida = true;
+        if (senhaVar.length < 1) {
+            senha_valida = false;
+            span_senha.innerHTML = `Senha invalida`;
+
+        } else if (senhaVar.length < 5 ||
+            senhaVar.length > 15) {
+            senha_valida = false;
+            span_senha.innerHTML = `max 15 caracteres min 5`;
+
+        } else {
+            span_senha.innerHTML = ``;
+        }
+
+        // VALIDANDO CONFIRMAÇÃO DE SENHA
+        var senha_conf_valida = true;
+        if (confirmacaoSenhaVar != senhaVar) {
+            senha_conf_valida = false;
+            span_conf_senha.innerHTML = `Senha invalida`;
+        } else {
+            span_conf_senha.innerHTML = ``;
+        }
+
+        // Tudo validado permitindo acesso ao back-end
+        if (nome_valido == true &&
+            email_valido == true &&
+            senha_valida == true &&
+            senha_conf_valida == true
+        ) {
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            })
+        }
+    }
+
+</script>

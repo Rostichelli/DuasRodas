@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button{
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+    color: rgb(255, 255, 255);
+}
+
+p {
+    font-family: xanh-mono;
+    color: #c2c1c1;
+}
+
+/* .paragrafo-per{
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    background-color: rgba(5, 5, 5, 0.9);
+    color: #ffffff;
+    border-radius: 10px;
+} */
+
+/* nav-bar */
+.navbar-container {
+    width: 100%;
+    height: 80px;
+    background-color: #000000;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+.logo {
+    color: aliceblue;
+    width: 130px;
+    margin-top: 15px;
+}
+
+nav {
+    position: relative;
+}
+
+.navbar-items {
+    position: absolute;
+    list-style: none;
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    right: 0;
+}
+
+.navbar-items li {
+    display: inline-block;
+    text-transform: uppercase;
+    margin-left: 25px;
+}
+
+.navbar-items li a {
+    color: white;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.navbar-items li a:hover {
+    color: #ccc;
+}
+
+.btn-login {
+    padding: 15px 20px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 20px;
+}
+
+/* leia mais */
+#btn_leiamais{
+    color: white;
+    padding: 13px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 20px;
+}
+
+#leia-mais{
+    display: none;
+}
+
+/* main-banner */
+.div-banner {
+    font-family: 'Dancing Script', cursive;
+    background-image: url('./143-1433048_ktm-rc16-race-bike-4k-wallpaper-4-k.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 180px;
+    margin: 0;
+    height: 250px;
+}
+
+.div-banner h1{
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* 1° sessao conexao com cliente*/
+.sessao-1 {
+    align-items: center;
+    display: flex;
+    height: auto;
+    padding: 30px;
+    flex-direction: column;
+    background-color: #000000;
+}
+
+
+.historinha-1 {
+    border: 2px solid #0e0e0e;
+    color: #ffffff;
+    border-radius: 10px;
+    width: 800px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+} 
+
+/* 2°sessao  */
+.sessao-2{
+    display: flex;
+    height: 250px;
+    padding: 30px;
+    background-color: #000000;
+}
+
+.textoConexao-1 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+/* sessao video */
+.video{
+    width: 600px;
+    border: solid 1px #262626;
+}
+
+.sessao-video{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #0e0e0e;
+    border-top: 2px solid rgb(31, 31, 31);
+}
+
+.sessao-video h1{
+    color: rgb(255, 255, 255);
+}
+
+/* quem somos */
+.quem-somos{
+    padding: 20px;
+    height: 150px;
+    display: flex;
+    background-color: #0e0e0e;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid rgb(31, 31, 31);
+}
+
+.quem-somos p, h1{
+    margin: 0;
+}
+
+.quem-somos .logo{
+    width: 100px;
+    height: 100px;
+
+}
+
+/* footer */
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid rgb(31, 31, 31);
+}
+
+.footer h4{
+    display: flex;
+    margin: 0;
+}
+
+.container-tipos-motos{
+    border: 0.1px solid rgb(255, 255, 255);
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Duas rodas</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+    <!-- nav-bar -->
+    <div class="navbar-container">
+        <nav>
+            <a href="#"><img class="logo" src="./img/logo_riders-removebg-preview.png" alt=""></a>
+            <ul class="navbar-items">
+                <li><a href="./index.html">Home</a></li>
+                <!-- <li><a href="#">Simulação</a></li> -->
+                <li><a href="./cadastro.html">Cadastro</a></li>
+                <li><a href="./login.html" class="btn-login">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- conteudo pricipal -->
+    <main>
+        <div class="container">
+            <div class="formulario">
+                <h2>
+                    Duas rodas
+                </h2>
+
+                <form class="form">
+                    <input class="input" id="ipt_email" placeholder="seuemail@gmail.com">
+
+                    <input type="password" class="input" id="ipt_senha" placeholder="Senha">
+                </form>
+
+                <button onclick="Entrar()" class="btn_entrar">
+                    ENTRAR
+                </button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <h4>
+                Douglas Rostichelli Alves © 2022
+            </h4>
+        </div>
+    </footer>
+
+</html>
+
+<script>
+
+
+    function Entrar() {
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./landingpage.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>
