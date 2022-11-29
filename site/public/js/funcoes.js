@@ -26,18 +26,18 @@ function limparSessao() {
 
 // carregamento (loading)
 function aguardar() {
-    var divAguardar = document.getElementById("div_aguardar");
+    var divAguardar = document.getElementById("loading-gif");
     divAguardar.style.display = "flex";
 }
 
-function finalizarAguardar(texto) {
-    var divAguardar = document.getElementById("div_aguardar");
+function finalizarAguardar() {
+    var divAguardar = document.getElementById("loading-gif");
     divAguardar.style.display = "none";
 
-    var divErrosLogin = document.getElementById("div_erros_login");
-    if (texto) {
-        divErrosLogin.innerHTML = texto;
-    }
+    // var divErrosLogin = document.getElementById("div_erros_login");
+    // if (texto) {
+    //     divErrosLogin.innerHTML = texto;
+    // }
 }
 
 

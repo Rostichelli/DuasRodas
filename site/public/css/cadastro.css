@@ -80,29 +80,6 @@ nav {
     padding: 10%;
 }
 
-/* erros */
-.alerta_erro{
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .card_erro {
-    display: none;
-    background-color: #fff;
-    color: black;
-    width: 230px;
-    position: fixed;
-    border-radius: 4px;
-    border: #e6005a 3px solid;
-    padding: 10px;
-    margin-right: 10%;
-  }
-  
-  .card_erro #mensagem_erro{
-    font-weight: 500;
-    font-size: 20px;
-  }
-
   /* formluario */
 .form{
     display: flex;
@@ -122,7 +99,7 @@ nav {
 .formulario {
     color:white;
     border-radius: 30px;
-    height: 420px;
+    height: auto;
     width: 420px;
     display: flex;
     flex-direction: column;
@@ -163,6 +140,29 @@ nav {
     transition: .5s;
     color: #ccc;
 }
+
+.estilos{
+    height: 25px;
+    margin-bottom: 20px;
+}
+
+.estilos option{
+    color: #000000;
+}
+
+/* loading */
+.loading-div {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+    display: none;
+  }
+  
 
 
 /* footer */

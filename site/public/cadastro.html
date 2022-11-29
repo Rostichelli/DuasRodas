@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | Duas rodas</title>
     <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./assets/icon/favicon2.png">
+
+    <script src="./js/funcoes.js"></script>
+
 </head>
 
 <body>
     <!-- nav-bar -->
     <div class="navbar-container">
         <nav>
-            <a href="#"><img class="logo" src="./img/logo_riders-removebg-preview.png" alt=""></a>
+            <a href="#"><img class="logo" src="" alt=""></a>
             <ul class="navbar-items">
                 <li><a href="./index.html">Home</a></li>
                 <!-- <li><a href="#">Simulação</a></li> -->
@@ -49,13 +53,24 @@
 
                     <input type="password" class="input" id="ipt_conf_senha" placeholder="Confirme sua senha">
 
-                    <span id="span_conf_senha"></span>
+                    <span id="span_conf_senha"></span> 
+
+                    Seu estilo preferido
+                    <select name="estilos" id="estilos" class="estilos">
+                        <option value="Esportiva">Esportiva</option>
+                        <option value="Custom">Custom</option>
+                        <option value="Trail, Big-trail">Trail, Big-trail</option>
+                    </select>
 
                 </form>
 
                 <button onclick="cadastrar()" class="btn_cadastrar">
                     CADASTRAR
                 </button>
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
 
             </div>
         </div>
@@ -73,6 +88,7 @@
 <script>
 
     function cadastrar() {
+        aguardar();
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
@@ -80,14 +96,16 @@
         var emailVar = ipt_email.value;
         var senhaVar = ipt_senha.value;
         var confirmacaoSenhaVar = ipt_conf_senha.value;
+        var estiloPreferidoVar = estilos.value;
 
+        // ===================================================================
         // Validações do nome 
-        var nome_valido = true;
-        if (nomeVar.length < 1) {
-            nome_valido = false;
-            span_nome.innerHTML = `Nome invalido`;
+        var validacao_nome = true;
 
-        } else if (nomeVar.indexOf("1") > -1 ||
+        if (nomeVar.length < 1 ||
+            nomeVar.length < 3 ||
+            nomeVar.length > 35 ||
+            nomeVar.indexOf("1") > -1 ||
             nomeVar.indexOf("2") > -1 ||
             nomeVar.indexOf("3") > -1 ||
             nomeVar.indexOf("4") > -1 ||
@@ -96,77 +114,76 @@
             nomeVar.indexOf("7") > -1 ||
             nomeVar.indexOf("8") > -1 ||
             nomeVar.indexOf("9") > -1 ||
-            nomeVar.indexOf("0") > -1
-        ) {
-            span_nome.innerHTML = `Nome invalido`;
-            nome_valido = false;
-        }
+            nomeVar.indexOf("0") > -1 ||
+            nomeVar.indexOf(" ") > -1) {
 
-        else if (nomeVar.length < 3 ||
-            nomeVar.length > 60) {
-            nome_valido = false;
-            span_nome.innerHTML = `max 60 caracteres min 2`;
+            validacao_nome = false;
+            setInterval(finalizarAguardar, 2000)
+            setTimeout(() => {
+                span_nome.innerHTML = `Nome invalido`
+            }, 2000);
+
         } else {
             span_nome.innerHTML = ``;
         }
 
+        // ===================================================================
         // Validações de email
-        var email_valido = true;
+        var validacao_email = true;
+        if (emailVar.length < 1 ||
+            emailVar.indexOf("@") < -1 ||
+            emailVar.indexOf("@") < 4 ||
+            emailVar.indexOf(" ") > -1) {
 
-        if (emailVar.length < 1) {
-            email_valido = false;
-            span_email.innerHTML = `Email invalido`;
-
-        } else if (emailVar.indexOf("@") < -1) {
-            email_valido = false;
-            span_email.innerHTML = `Email invalido`;
-
-        } else if (emailVar.indexOf("@") < 5) {
-            email_valido = false;
-            span_email.innerHTML = `Email invalido`;
-
-        // } else if (emailVar.indexOf(".com") 
-        //     emailVar.indexOf(".com.br") == false) {
-
-        } else if (emailVar.endsWith(".com") == false &&
-            emailVar.endsWith(".com.br") == false) {
-            email_valido = false;
-            span_email.innerHTML = `Email invalido`;
+            validacao_email = false;
+            setInterval(finalizarAguardar, 2000)
+            setTimeout(() => {
+                span_email.innerHTML = `Email invalido`
+            }, 2000)
 
         } else {
             span_email.innerHTML = ``;
         }
 
+        // ===================================================================
         // VALIDANDO SENHA
-        var senha_valida = true;
-        if (senhaVar.length < 1) {
-            senha_valida = false;
-            span_senha.innerHTML = `Senha invalida`;
-
-        } else if (senhaVar.length < 5 ||
+        var validacao_senha = true;
+        if (senhaVar.length < 1 ||
+            senhaVar.length < 5 ||
             senhaVar.length > 15) {
-            senha_valida = false;
-            span_senha.innerHTML = `max 15 caracteres min 5`;
+
+            validacao_senha = false;
+            setInterval(finalizarAguardar, 2000)
+            setTimeout(() => {
+                span_senha.innerHTML = `Senha invalida`
+            }, 2000)
 
         } else {
             span_senha.innerHTML = ``;
         }
 
+        // ===================================================================
         // VALIDANDO CONFIRMAÇÃO DE SENHA
-        var senha_conf_valida = true;
-        if (confirmacaoSenhaVar != senhaVar) {
-            senha_conf_valida = false;
-            span_conf_senha.innerHTML = `Senha invalida`;
+        var validacao_conf_senha = true;
+        if (confirmacaoSenhaVar != senhaVar ||
+            confirmacaoSenhaVar.length < 1) {
+
+            validacao_conf_senha = false;
+            setInterval(finalizarAguardar, 2000)
+            setTimeout(() => {
+                span_conf_senha.innerHTML = `Senha invalida`
+            }, 2000)
+
         } else {
             span_conf_senha.innerHTML = ``;
         }
-
-        // Tudo validado permitindo acesso ao back-end
-        if (nome_valido == true &&
-            email_valido == true &&
-            senha_valida == true &&
-            senha_conf_valida == true
-        ) {
+        
+        // ===================================================================
+        // Premitindo acesso ao back-end
+        if (validacao_nome == true &&
+            validacao_email == true &&
+            validacao_senha == true &&
+            validacao_conf_senha == true) {
 
             fetch("/usuarios/cadastrar", {
                 method: "POST",
@@ -176,12 +193,28 @@
                 body: JSON.stringify({
                     // crie um atributo que recebe o valor recuperado aqui
                     // Agora vá para o arquivo routes/usuario.js
+                    estiloPreferidoServer: estiloPreferidoVar,
                     nomeServer: nomeVar,
                     emailServer: emailVar,
                     senhaServer: senhaVar
                 })
             })
+            setTimeout(() => {
+                window.location = "login.html";
+            }, "2000")
+
+            return false;
+        }else{
+            setTimeout(() => {
+                alert(`INSTRUÇÕES
+                1- Nome não pode ser preenchido com espaços nem com numeros, deve ter no minimo 5 caracteres e no max 35)`)
+            }, 2200)
         }
     }
+
+    // function sumirMensagem() {
+        //     cardErro.style.display = "none"
+        // }
+
 
 </script>
