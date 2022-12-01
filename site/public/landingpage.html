@@ -33,9 +33,9 @@
             </div>
 
             <span class="titulo">Teste seu conhecimento !</span>
-            <div class="instrucao">Leia a questão e clique na resposta correta</div>
-            <div class="quiz">
-                <div class="form_perguntas">
+            <div class="instrucao" id="id_instrucao">Leia a questão e clique na resposta correta</div>
+            <div class="quiz" id="div_quiz">
+                <div class="form_perguntas" id="meio_quiz">
                     <span id="pergunta" class="pergunta">
                     </span>
                     <ul>
@@ -47,6 +47,8 @@
                 </div>
                 </ul>
             </div>
+
+            <button onclick="btn_finalizar()" id="botton_finalizar" class="finalizar">Finalizar</button>
             <div id="pontuacao" class="num_pergunta">
             </div>
 
@@ -62,6 +64,44 @@
     </footer>
 
     <script>
+const idusuarioVar = sessionStorage.ID_USUARIO
+fetch("/usuarios/autenticartentativas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idusuarioServer: idusuarioVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.TENTATIVA_USUARIO = json.qtdtentativas;
+
+                    if(sessionStorage.TENTATIVA_USUARIO > 0){
+                        div_quiz.style.display = "none";
+                        id_instrucao.style.display = "none";
+                    }
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        })
 
         // perguntas em formato de json
         const q1 = {
@@ -118,22 +158,49 @@
                 proximaQuestao();
             }
 
-            for (i = 0;
-                i < listaPerguntas.length;
-                i++) {
-                if (listaPerguntas[i].pontuou == 'true') {
-                    pontos += 10;
-                }
-            }
         };
 
         function proximaQuestao() {
+
+            if (Questao == 2) {
+                div_quiz.style.display = "none";
+                botton_finalizar.style.display = "flex";
+            }
             Questao++;
             pergunta.innerHTML = `${listaPerguntas[Questao].numQuestao}- ${listaPerguntas[Questao].pergunta}`;
             a.innerHTML = `${listaPerguntas[Questao].alternativaA}`;
             b.innerHTML = `${listaPerguntas[Questao].alternativaB}`;
             c.innerHTML = `${listaPerguntas[Questao].alternativaC}`;
+        }
 
+        function btn_finalizar() {
+            var id = sessionStorage.ID_USUARIO;
+            for (i = 0;
+                i < listaPerguntas.length;
+                i++) {
+                if (listaPerguntas[i].pontuou == 'true') {
+                    pontos += 10;
+                    pontuacao.style.display = "inline";
+                    pontuacao.innerHTML = `Pontuação ${pontos}`;
+                }
+            }
+
+            fetch("/usuarios/cadastrarConhecimento", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    pontosServer: pontos,
+                    idServer: id
+                })
+            })
+
+            setInterval(() => {
+                window.location = './landingpage.html'
+            }, 2000);
         }
 
 
@@ -228,7 +295,7 @@
                 document.getElementById('myChart'),
                 config
             );
-    }
+        }
 
             // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
 

@@ -16,9 +16,17 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+router.post("/cadastrarConhecimento", function (req, res) {
+    usuarioController.cadastrarConhecimento(req, res);
+})
+
 
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
+});
+
+router.post("/autenticartentativas", function (req, res) {
+    usuarioController.tentativa(req, res);
 });
 
 module.exports = router;

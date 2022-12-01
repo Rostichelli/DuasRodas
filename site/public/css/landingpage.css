@@ -144,10 +144,24 @@ nav {
 }
 
 .num_pergunta{
+    display: none;
     color:  rgba(205, 1, 1);
     align-items: center;
     justify-content: center;
     margin-top: 10px;
+}
+
+.finalizar{
+    display: none;
+    border: none;
+    width: 180px;
+    padding: 10px;
+    align-items: center;
+    margin-left: 10px;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 /* footer */
