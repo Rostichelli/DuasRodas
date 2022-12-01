@@ -17,7 +17,7 @@
     <!-- nav-bar -->
     <div class="navbar-container">
         <nav>
-            <a href="#"><img class="logo" src="" alt=""></a>
+            <img src="./assets/img/logo_riders-removebg-preview.png" class="logo">
             <ul class="navbar-items">
                 <li><a href="./index.html">Home</a></li>
                 <!-- <li><a href="#">Simulação</a></li> -->
@@ -53,7 +53,7 @@
 
                     <input type="password" class="input" id="ipt_conf_senha" placeholder="Confirme sua senha">
 
-                    <span id="span_conf_senha"></span> 
+                    <span id="span_conf_senha"></span>
 
                     Seu estilo preferido
                     <select name="estilos" id="estilos" class="estilos">
@@ -177,7 +177,7 @@
         } else {
             span_conf_senha.innerHTML = ``;
         }
-        
+
         // ===================================================================
         // Premitindo acesso ao back-end
         if (validacao_nome == true &&
@@ -193,21 +193,30 @@
                 body: JSON.stringify({
                     // crie um atributo que recebe o valor recuperado aqui
                     // Agora vá para o arquivo routes/usuario.js
-                    estiloPreferidoServer: estiloPreferidoVar,
                     nomeServer: nomeVar,
                     emailServer: emailVar,
-                    senhaServer: senhaVar
+                    senhaServer: senhaVar,
+                    estiloServer : estiloPreferidoVar
                 })
             })
-            setTimeout(() => {
+                setTimeout(() => {
                 window.location = "login.html";
-            }, "2000")
+                }, "2000")
 
-            return false;
-        }else{
-            setTimeout(() => {
+                return false;
+            } else {
+                setTimeout(() => {
                 alert(`INSTRUÇÕES
-                1- Nome não pode ser preenchido com espaços nem com numeros, deve ter no minimo 5 caracteres e no max 35)`)
+                1- Nome não pode ser preenchido com espaços nem com 
+                numeros, deve ter no minimo 5 caracteres e no max 35
+                
+                2- Email não pode ser preenchido com espaços digite um 
+                email valido contedo o caracter @
+                
+                3- A senha deve conter min 5 caracteres e max 15 
+
+                4- Confirmação de senha deve ser identico a senha`
+                )
             }, 2200)
         }
     }

@@ -38,9 +38,8 @@ p {
 }
 
 .logo {
-    color: aliceblue;
-    width: 130px;
-    margin-top: 15px;
+    height: 60px;
+    width: 110px;
 }
 
 nav {

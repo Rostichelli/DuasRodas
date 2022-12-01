@@ -1,5 +1,5 @@
 body {
-    background-color: #ffffff;
+    background-color: rgb(40, 40, 40);
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,19 +14,23 @@ p {
     color: #d6d6d6;
 }
 
+button{
+    cursor: pointer;
+}
+
 /* nav-bar */
 
 .navbar-container {
     width: 100%;
     height: 80px;
-    background-color: #000000;
+    background-color: #050505;
     padding: 0 25px;
     box-sizing: border-box;
 }
 
 .logo {
-    width: 130px;
-    margin-top: 15px;
+    height: 60px;
+    width: 110px;
 }
 
 nav {
@@ -67,13 +71,12 @@ nav {
 
 /* conteudo pricipal */
 .container{
-    height: 300px;
-    color: aqua;
+    height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
-    padding: 10%;
+    flex-direction: column;
 }
 
 .classificacao{
@@ -81,8 +84,73 @@ nav {
 }
 
 
-/* footer */
+/* quizzzzzzzz */
+.titulo{
+    margin-top: 50px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    font-weight: bolder;
+}
 
+.instrucao{
+    margin-top: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 3px rgb(255, 41, 41);
+    margin-bottom: 15px;
+    border: solid 1px black;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: auto;
+    height: 35px;
+}
+
+/* .pergunt{} */
+
+.pergunta{
+    font-size: small;
+    font-weight: bolder;
+    color: white;
+}
+
+.alternativa{
+    border: none;
+    width: 180px;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    margin-left: 10px;
+    color: white;
+    background-color: rgb(40, 40, 40);
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alternativa:hover{
+    background-color: rgb(255, 0, 0);
+}
+
+.form_perguntas ul{
+    padding: 0;
+}
+
+.quiz{
+    border-radius: 10px;
+    padding: 15px;
+    height: auto;
+    width: 200px;
+    border: solid 0.8px white;
+}
+
+.num_pergunta{
+    color:  rgba(205, 1, 1);
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* footer */
 .footer{
     display: flex;
     align-items: center;

@@ -14,10 +14,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select estiloPilotagem as motos, count(estiloPilotagem) as qtdVotos
-        from usuario 
-        group by estiloPilotagem
-        order by count(estiloPilotagem) desc;`;
+        instrucaoSql = `select estilopilotagem as motos, count(estiloPilotagem)  as qtdVotos from usuario group by estiloPilotagem;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
