@@ -71,12 +71,16 @@ nav {
 
 /* conteudo pricipal */
 .container{
-    height: 700px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
     flex-direction: column;
+}
+
+.mychart{
+    margin-top: 20px;
 }
 
 .classificacao{
@@ -157,6 +161,51 @@ nav {
     width: 180px;
     padding: 10px;
     align-items: center;
+    margin-left: 10px;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    /* margin-bottom: 0px; */
+    margin-top: 70px;
+    border-radius: 5px;
+}
+
+.titulo_sonhos{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    font-weight: bolder;
+}
+
+.sonhos{
+    margin-top: 30px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.ipt_sonhos{
+    border: none;
+    width: 180px;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    margin-left: 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.btn_sonhos{
+    border: none;
+    width: 180px;
+    padding: 10px;
+    align-items: center;
+    display: flex;
     margin-left: 10px;
     color: white;
     background-color: rgb(255, 0, 0);

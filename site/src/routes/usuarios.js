@@ -29,4 +29,8 @@ router.post("/autenticartentativas", function (req, res) {
     usuarioController.tentativa(req, res);
 });
 
+router.post("/cadastrarSonhos", function (req, res) {
+    usuarioController.cadastrarSonhos(req, res);
+});
+
 module.exports = router;

@@ -69,29 +69,29 @@ function tentativa(req, res) {
     //     res.status(400).send("Sua senha está indefinida!");
     // } else {
 
-        usuarioModel.tentativa(idUsuario)
-            .then(
-                function (resultado) {
-                    console.log(`\nResultados encontrados: ${resultado.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+    usuarioModel.tentativa(idUsuario)
+        .then(
+            function (resultado) {
+                console.log(`\nResultados encontrados: ${resultado.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                    if (resultado.length == 1) {
-                        console.log(resultado);
-                        res.json(resultado[0]);
-                    } else if (resultado.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
-                    } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                    }
+                if (resultado.length == 1) {
+                    console.log(resultado);
+                    res.json(resultado[0]);
+                } else if (resultado.length == 0) {
+                    res.status(403).send("Email e/ou senha inválido(s)");
+                } else {
+                    res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                 }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 
 
@@ -132,6 +132,37 @@ function cadastrar(req, res) {
     }
 }
 
+function cadastrarSonhos(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var id = req.body.idServer;
+    var marca = req.body.marcaServer;
+    var modelo = req.body.modeloServer;
+    var ano = req.body.anoServer;
+    var cor = req.body.corServer;
+
+
+    // Faça as validações dos valores
+
+    // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+    usuarioModel.cadastrarSonhos(id, marca, modelo, ano, cor)
+        .then(
+            function (resultado) {
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+                res.json(resultado[0]);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 function cadastrarConhecimento(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var pontuacao = req.body.pontosServer;
@@ -147,28 +178,29 @@ function cadastrarConhecimento(req, res) {
     //     res.status(400).send("Sua senha está undefined!");
     // } else {
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarConhecimento(pontuacao, idu)
-            .then(
-                function (resultado) {
-                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-                    res.json(resultado[0]);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
+    // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+    usuarioModel.cadastrarConhecimento(pontuacao, idu)
+        .then(
+            function (resultado) {
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+                res.json(resultado[0]);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 // }
 
 
 module.exports = {
+    cadastrarSonhos,
     tentativa,
     cadastrarConhecimento,
     entrar,

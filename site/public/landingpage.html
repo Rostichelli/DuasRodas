@@ -29,10 +29,10 @@
         <div class="container">
 
             <div class="chart-container" style="position: relative; height:40vh; width:40vw">
-                <canvas id="myChart"></canvas>
+                    <canvas id="myChart" class="mychart"></canvas>
             </div>
 
-            <span class="titulo">Teste seu conhecimento !</span>
+            <span class="titulo" id="spn_titulo">Teste seu conhecimento !</span>
             <div class="instrucao" id="id_instrucao">Leia a questão e clique na resposta correta</div>
             <div class="quiz" id="div_quiz">
                 <div class="form_perguntas" id="meio_quiz">
@@ -48,8 +48,24 @@
                 </ul>
             </div>
 
-            <button onclick="btn_finalizar()" id="botton_finalizar" class="finalizar">Finalizar</button>
+            <button onclick="btn_finalizar()" id="botton_finalizar" class="finalizar">Ver Pontuação</button>
             <div id="pontuacao" class="num_pergunta">
+            </div>
+
+            <div class="sonhos">
+                <span class="titulo_sonhos">Compartilhe conosco seus sonho Duas-Rodas !
+                    e</span>
+                <input id="ipt_marca" placeholder="Marca" class="ipt_sonhos">
+                <input id="ipt_modelo" placeholder="Modelo" class="ipt_sonhos">
+                <input id="ipt_ano" placeholder="Ano" class="ipt_sonhos">
+                <input id="ipt_cor" placeholder="Cor" class="ipt_sonhos">
+
+                <button onclick="cadastrar_sonhos()" class="btn_sonhos">
+                    Cadastrar Sonho
+                </button> <br>
+                <span style="color: white;">
+                    Em breve conteudos sobre os maiores sonhos de consumo no mundo duas rodas!!!
+                </span>
             </div>
 
         </div>
@@ -64,8 +80,8 @@
     </footer>
 
     <script>
-const idusuarioVar = sessionStorage.ID_USUARIO
-fetch("/usuarios/autenticartentativas", {
+        const idusuarioVar = sessionStorage.ID_USUARIO
+        fetch("/usuarios/autenticartentativas", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -85,9 +101,10 @@ fetch("/usuarios/autenticartentativas", {
 
                     sessionStorage.TENTATIVA_USUARIO = json.qtdtentativas;
 
-                    if(sessionStorage.TENTATIVA_USUARIO > 0){
+                    if (sessionStorage.TENTATIVA_USUARIO > 0) {
                         div_quiz.style.display = "none";
                         id_instrucao.style.display = "none";
+                        spn_titulo.style.display = "none";
                     }
                 });
 
@@ -165,6 +182,10 @@ fetch("/usuarios/autenticartentativas", {
             if (Questao == 2) {
                 div_quiz.style.display = "none";
                 botton_finalizar.style.display = "flex";
+                spn_titulo.style.display = "none";
+                id_instrucao.style.display = "none";
+
+
             }
             Questao++;
             pergunta.innerHTML = `${listaPerguntas[Questao].numQuestao}- ${listaPerguntas[Questao].pergunta}`;
@@ -297,7 +318,7 @@ fetch("/usuarios/autenticartentativas", {
             );
         }
 
-            // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+        // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
 
 
         // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
@@ -354,4 +375,41 @@ fetch("/usuarios/autenticartentativas", {
         //         });
 
         // }
+
+        function cadastrar_sonhos() {
+            var idVar = sessionStorage.ID_USUARIO;
+            var marcaVar = ipt_marca.value;
+            var modeloVar = ipt_modelo.value;
+            var anoVar = ipt_ano.value;
+            var corVar = ipt_cor.value;
+
+            if (marcaVar == " " ||
+                modeloVar == " " ||
+                anoVar == " " ||
+                corVar == " "|| 
+                marcaVar.length < 1 ||
+                modeloVar.length < 1 ||
+                anoVar.length < 1 ||
+                corVar.length < 1) {
+                alert(`Preencha os campos corretamente`)
+            } else {
+                fetch("/usuarios/cadastrarSonhos", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        // crie um atributo que recebe o valor recuperado aqui
+                        // Agora vá para o arquivo routes/usuario.js
+                        idServer: idVar,
+                        marcaServer: marcaVar,
+                        modeloServer: modeloVar,
+                        anoServer: anoVar,
+                        corServer: corVar
+                    })
+                })
+                alert(`O sonho da ${modeloVar} foi registrado com sucesso, obrigado por compartilhar esse sonhos conosco`)
+            }
+
+        }
     </script>

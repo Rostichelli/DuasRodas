@@ -40,6 +40,18 @@ function cadastrar(nome, email, senha, estilo) {
     return database.executar(instrucao);
 }
 
+function cadastrarSonhos(id, marca, modelo, ano, cor) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", id, marca, modelo, ano, cor);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        INSERT INTO sonhos (marca, modelo, ano, cor, fkUsuario) VALUES ( '${marca}', '${modelo}', '${ano}', '${cor}', '${id}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function cadastrarConhecimento(pontuacao, idu) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",pontuacao, idu);
 
@@ -53,6 +65,7 @@ function cadastrarConhecimento(pontuacao, idu) {
 }
 
 module.exports = {
+    cadastrarSonhos,
     tentativa,
     cadastrarConhecimento,
     entrar,
